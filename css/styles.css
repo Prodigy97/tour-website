@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@400;700&family=Lato:wght@100;300;400;700;900&family=Libre+Baskerville:wght@700&family=McLaren&family=Merriweather&family=Merriweather+Sans&family=Montserrat+Alternates&family=Montserrat:wght@300&family=Mulish&family=Noto+Serif:wght@400;700&family=Open+Sans:wght@300;400;600;700;800&family=Oswald&family=PT+Serif&family=Poppins:wght@400;700&family=Raleway:wght@200;400;500;600;700;800;900&family=Sacramento&display=swap');
+/* NOTES:
+      - always set project wide fonts
+      - * is used for a basic reset
+      - clip-path should be used to clip corners of a container
+      - there's also no need to use normalize.css anymore, since most browsers now render websites more consistently
+      - use "display: inline-block" if you intend to apply spacings to a TEXT
+
+      PS: ctrl + Fn + Up||down is change tab globally
+      
+      - Think [About the LayOut of Webpage or WebApp : "CompDD"]
+      - Build [LayOut in HTML and CSS with consistent structure and class naming: B.E.M naming
+              .block__element--modififer]
+      - Architect [logical Architecture for HTML and CSS files]
+*/
+
+
+:root {
+      --light-green: #7ed56f;
+      --medium-green: #55c57a;
+      --dark-green: #28b485;
+}
+
+/* Always prefer "Inheritance Styling" to "Universal Selector Styling" */
+*,
+*::before,
+*::after {
+      padding: 0;
+      margin: 0;
+      box-sizing: inherit;
+}
+
+html {
+      /*
+            This sets the font root, thus giving us an advantage when it 
+            comes to Media queries, Responsive design, and Zooming
+                                                                         */
+      font-size: 62.5%;
+}
+
+body {
+      padding: 30px;
+      font: 400 1.6rem/1.7 Lato, "sans-serif";
+      color: #777;
+      box-sizing: border-box;
+}
+
+.header {
+      height: 95vh;
+      background-image: linear-gradient(to right bottom,
+                  hsla(111, 55%, 64%, 0.8),
+                  hsla(160, 64%, 43%, 0.8)),
+            url(../images/background-img-hero.jpg);
+      background-size: cover;
+      background-position: top;
+      position: relative;
+      /* Here, we use a polygon function to express a set of co-ordinates */
+      clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.logo-box {
+      position: absolute;
+      top: 4rem;
+      left: 4rem;
+}
+
+.logo {
+      height: 5.5rem;
+}
+
+.text-box {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* perfect centering  */
+      text-align: center;
+}
+
+.heading-primary {
+      color: #fff;
+      text-transform: uppercase;
+      backface-visibility: hidden;
+      /* Nullifies the up-down||shaky movement of the text-box div 
+      during animation  */
+      margin-bottom: 60px;
+}
+
+/* For browsers optimization, It is only best to animate two properties: 
+      - opacity
+      - transform
+*/
+
+.heading-primary-main {
+      display: block;
+      font: 6rem/2 Lato, "sans-serif";
+      letter-spacing: 3.5rem;
+      animation: slideInFromLeft 1000ms ease-out;
+
+      /* animation-delay: 3000ms;  
+      animation-iteration-count: 3;   
+      animation-timing-function: ease | ease-in | ease-out | ease-in-out | linear |
+      steps() | frames() | cubic-bezier() | step-start | step-end */
+}
+
+@keyframes slideInFromLeft {
+      0% {
+            opacity: 0;
+            transform: translateX(-150px);
+      }
+
+      80% {
+            transform: translateX(10px);
+      }
+
+      100% {
+            opacity: 1;
+            transform: translateX(0);
+      }
+}
+
+
+.heading-primary-sub {
+      display: block;
+      font: 700 2rem Lato, "sans-serif";
+      letter-spacing: 1.74rem;
+      animation-name: slideInFromRight;
+      animation: slideInFromRight 1000ms ease-out;
+}
+
+@keyframes slideInFromRight {
+      0% {
+            opacity: 0;
+            transform: translateX(150px);
+      }
+
+      80% {
+            transform: translateX(-10px);
+      }
+
+      100% {
+            opacity: 1;
+            transform: translateX(0);
+      }
+}
+
+
+.btn:link,
+.btn:visited {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.5rem 4rem;
+      display: inline-block;
+      border-radius: 20rem;
+      transition: all .2s;
+      position: relative;
+}
+
+.btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+      background-color: #fff;
+      color: #777;
+}
+
+.btn::after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      border-radius: 20rem;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all .4s;
+}
+
+.btn-white::after {
+      background-color: #fff;
+      position: absolute;
+}
+
+.btn:hover::after {
+      transform: scaleX(1.2) scaleY(1.6);
+      opacity: 0;
+}
+
+.btn-animated {
+      animation: moveUpButton 500ms ease-out 750ms;
+      animation-fill-mode: backwards;
+}
+
+@keyframes moveUpButton {
+      0% {
+            opacity: 0;
+            transform: translateY(40px);
+      }
+
+      100% {
+            opacity: 1;
+            transform: translateY(0);
+      }
+}
